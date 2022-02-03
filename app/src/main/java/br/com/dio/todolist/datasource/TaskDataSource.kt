@@ -3,9 +3,11 @@ package br.com.dio.todolist.datasource
 import br.com.dio.todolist.model.Task
 
 object TaskDataSource {
-    private val list = arrayListOf<Task>()
+    private val list = mutableListOf<Task>()
 
-    fun getList() = list.toList()
+    fun getList() =
+        list.toList().sortedWith(compareBy ({ it.date }, {it.hour}))
+
 
     fun insertTask(task: Task) {
         if (task.id == 0) {
